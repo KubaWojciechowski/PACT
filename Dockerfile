@@ -5,3 +5,4 @@ RUN yes | pip install numpy pandas biopython
 # modeller
 RUN wget https://salilab.org/modeller/10.1/modeller_10.1-1_amd64.deb
 RUN env KEY_MODELLER=MODELIRANJE dpkg -i modeller_10.1-1_amd64.deb
+RUN ln -s /usr/bin/mod10.1 /usr/bin/mod

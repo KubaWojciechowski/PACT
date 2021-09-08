@@ -124,8 +124,10 @@ def cross_model(seq1, seq2, name, output_path):
             os.chdir(models_path)
 
             cross_infile(seq1, seq2, template, template_fasta)
-                    
-            runScript("mod9.24 runMod.py")
+            
+            # To be version agnostic use mod runMod.py
+            # This requires soft link to version downloaded inside docker
+            runScript("mod runMod.py")
 
             os.chdir('../../../')
 
