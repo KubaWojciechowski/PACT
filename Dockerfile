@@ -1,5 +1,5 @@
 FROM python:3
-WORKDIR PACT
+WORKDIR /PACT
 # python packages
 RUN yes | pip install numpy pandas biopython
 # modeller
