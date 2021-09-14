@@ -1,0 +1,131 @@
+body{
+    color: white;
+    background-color: grey;
+    font: normal 16px Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+    margin: 0;
+}
+
+.container{
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+}
+.container ul{
+    columns: 2;
+    list-style: none;
+}
+.container li{
+    width: 100%;
+}
+
+
+#main-header{
+    background-image: url('../images/logo_v1_bg.png');
+    height: 200px;
+}
+
+#navbar{
+    background-color: black;
+    color: white;
+}
+
+#navbar ul{
+    padding: 0;
+    list-style: none;
+}
+
+#navbar li{
+    display: inline;
+}
+
+#navbar a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding-right: 15px;
+}
+#navbar a:hover{
+    color: coral;
+}
+
+#showcase{
+    background-position: center right;
+    min-height: 300px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#showcase h1{
+    color: #fff;
+    font-size: 25px;
+    line-height: 1.2em;
+    padding-top: 30px;
+}
+
+#main{
+    float: left;
+    width: 70%;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+#main h6{
+    margin: 0;
+    margin: 0;
+}
+
+
+#sidebar{
+    float:right;
+    width: 30%;
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+
+.button{
+    font: 20px Arial;
+    width: 100%;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.button:hover{
+    color: green;
+}
+
+#main-footer{
+    background: #333;
+    color: #fff;
+    text-align: left;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#main-footer h5{
+    text-align: center;
+}
+#main-footer p{
+    margin: 0;
+    padding: 0;
+}
+
+
+@media(max-width:600px){
+    #main{
+        width: 100%;
+        float:none;
+    }
+    #sidebar{
+        width: 100%;
+        float:none;
+    }
+}
