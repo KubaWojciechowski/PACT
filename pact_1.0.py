@@ -1,8 +1,10 @@
 import os
+import sys
 import argparse
 import textwrap
 import subprocess
 import pickle
+import re
 import concurrent.futures
 import numpy as np
 import pandas as pd
@@ -127,9 +129,49 @@ def cross_model(seq1, seq2, name, output_path):
             
             # To be version agnostic use mod runMod.py
             # This requires soft link to version downloaded inside docker
-            runScript("mod runMod.py")
+            #runScript("mod runMod.py")
+            runScript("mod9.24 runMod.py")
 
             os.chdir('../../../')
+
+
+def check_if_fasta(seq):
+    for i in seq:
+        if not i in ['A','C','D','E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']:
+            return False
+            break
+    return True
+
+
+def check_input(input_path):
+
+    data = pd.read_csv(input_path)
+    #print(data.columns)
+    if not (data.columns == ['interactor', 'seq1', 'interactee', 'seq2']).all(): 
+        sys.exit("Invalid header in input file, should be: \ninteractor,seq1,interactee,seq2")
+
+    seq_list1 = data['seq1']
+    seq_list2 = data['seq2']
+
+    n = 0
+    for seq1, seq2 in zip(seq_list1, seq_list2):
+        if len(seq1) > 45:
+            sys.exit("Error in pair %d: seq1 is too long!" % n)
+        if len(seq2) > 45:
+            sys.exit("Error in pair %d: seq2 is too long!" % n)
+        if len(seq1) < 14:
+            sys.exit("Error in pair %d: seq1 is too short!" % n)
+        if len(seq1) < 14:
+            sys.exit("Error in pair %d: seq2 is too short!" % n)
+        
+        if not check_if_fasta(seq1):
+            sys.exit("Error in pair %d: non FASTA chracters in seq1!" % n)
+        
+        if not check_if_fasta(seq2):
+            sys.exit("Error in pair %d: non FASTA chracters in seq2!" % n)
+
+        n+=1
+
 
 
 if __name__ == '__main__':
@@ -139,9 +181,13 @@ if __name__ == '__main__':
     input_path = args.input
     output_path = args.output
     
+    check_input(input_path)
+
     # Modeling
     if not os.path.exists(output_path):
         os.mkdir(output_path)
+    else:
+        sys.exit('Output directory already exist!')
 
     data = pd.read_csv(input_path)
 
