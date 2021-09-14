@@ -8,7 +8,11 @@ As well as some Python packages:
 * Pandas
 * Biopython
 ## Input
-PATH takes as an input csv file with .
+PATH takes as an input csv file with the folowing columns: 
+
+interactor,seq1,interactee,seq2
+
+Where interactor and interactee are the names, and seq1 and seq2 are sequences of interacting proteins in fasta format
 ## Running PACT
 You can run PACT as any other Python script by typeing:
 `python pact_1.0.py -i <input_file> -o <output_directory>`
