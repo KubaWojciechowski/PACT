@@ -4,6 +4,7 @@ import argparse
 import textwrap
 import subprocess
 import pickle
+import re
 import concurrent.futures
 import numpy as np
 import pandas as pd
