@@ -139,7 +139,6 @@ def check_if_fasta(seq):
     for i in seq:
         if not i in ['A','C','D','E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']:
             return False
-            break
     return True
 
 
