@@ -1,9 +1,9 @@
 import re
 import pandas as pd
 
-def is_sequence_well_formed(seq: str):
-    if re.search("[A-Y]{14,45}"):
-        return re.search("^((?!B|J|O|U).)*$", seq)
+def is_sequence_well_formed(seq:str):
+    if re.search("[A-Y]{14,45}",seq) and re.search("^((?!B|J|O|U).)*$", seq):
+        return True
     return False
 
 
