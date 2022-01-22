@@ -1,6 +1,7 @@
-from Bio import SeqIO
 import textwrap
+import os
 
+from Bio import SeqIO
 # should probably be called get template sequence
 def get_template_sequence(fasta, template):
     record = SeqIO.parse(fasta, 'fasta')
@@ -57,7 +58,11 @@ def align_sequences(seq1, seq2, t_seq):
 def create_alignment_file(pathToAlignmentFile : str, seq1, seq2, structure, fasta):
     template_seq = get_template_sequence(fasta, structure)
     alignmentFileName = 'alignment.pir'
-    alignmentFile = open(pathToAlignmentFile+alignmentFileName, 'w') 
+    if os.path.exists(pathToAlignmentFile):
+        alignmentFile = open(pathToAlignmentFile+'/'+alignmentFileName, 'w') 
+    else:
+        os.mkdir(pathToAlignmentFile)
+        alignmentFile = open(pathToAlignmentFile+'/'+alignmentFileName, 'w') 
     seq1, seq2, template_seq = align_sequences(seq1, seq2, template_seq)
 
     print(">P1;template", file=alignmentFile)
