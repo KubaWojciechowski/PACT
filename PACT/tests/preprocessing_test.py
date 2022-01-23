@@ -14,6 +14,6 @@ def test_align_sequences():
 
 def test_get_template_sequence():
     structure = 'iapp'
-    template = 'templates.fasta'
+    template = '/PACT/PACT/tests/templates.fasta'
     sequence = get_template_sequence(template, structure)
     assert(sequence == "KCNTATCATQRLANFLVHSSNNFGAILSSTNVGSNTY")

@@ -55,14 +55,13 @@ def align_sequences(seq1, seq2, t_seq):
     return(seq1, seq2, t_seq)
 
 # unfortunately alignment file is needed by the modeller, so we need to make this files system write
-def create_alignment_file(pathToAlignmentFile : str, seq1, seq2, structure, fasta):
+def create_alignment_file(seq1, seq2, structure, fasta, pathToOutputDirectory:str):
     template_seq = get_template_sequence(fasta, structure)
     alignmentFileName = 'alignment.pir'
-    if os.path.exists(pathToAlignmentFile):
-        alignmentFile = open(pathToAlignmentFile+'/'+alignmentFileName, 'w') 
-    else:
-        os.mkdir(pathToAlignmentFile)
-        alignmentFile = open(pathToAlignmentFile+'/'+alignmentFileName, 'w') 
+    alignmentFilePath = pathToOutputDirectory + '/' + alignmentFileName
+    if not os.path.exists(pathToOutputDirectory):
+        os.mkdir(pathToOutputDirectory)
+    alignmentFile = open(alignmentFilePath, 'w') 
     seq1, seq2, template_seq = align_sequences(seq1, seq2, template_seq)
 
     print(">P1;template", file=alignmentFile)
@@ -84,4 +83,4 @@ def create_alignment_file(pathToAlignmentFile : str, seq1, seq2, structure, fast
 
     alignmentFile.close()
 
-    return alignmentFileName
+    return alignmentFilePath
