@@ -22,7 +22,7 @@ def runModeller(pathToAlignmentFile : str, pathToOutputDirectory : str):
 
     env = Environ()
     # directories for input atom files
-    env.io.atom_files_directory = ['.','/PACT/templates/']
+    env.io.atom_files_directory = ['.','/PACT/res/templates/']
 
     # Be sure to use 'MyModel' rather than 'automodel' here!
     a = MyModel(env,
@@ -45,12 +45,13 @@ def runModeller(pathToAlignmentFile : str, pathToOutputDirectory : str):
 
     return a.outputs
 
-def cross_model(seq1, seq2, name, pathToOutputDirectory:str):
-    structure = ('iapp')
-    TEMPLATES_FASTA = '/PACT/PACT/tests/templates.fasta'
+def cross_model(seq1, seq2, pathToOutputDirectory:str):
+    TEMPLATES_FASTA = '/PACT/PACT/res/templates.fasta'
     for template in ['iapp']:
-        model_path = pathToOutputDirectory + name + template
-        alignmentFilePath = create_alignment_file(seq1, seq2, structure, TEMPLATES_FASTA, model_path) # creates alignment file
+        model_path = pathToOutputDirectory + '/' + template
+        #if not os.path.exists(model_path):
+        #    os.mkdir(model_path)
+        alignmentFilePath = create_alignment_file(seq1, seq2, template, TEMPLATES_FASTA, model_path) # creates alignment file
         fullPath = '/PACT/' + str(alignmentFilePath)
         outputs = runModeller(fullPath, model_path)
     return outputs
@@ -61,16 +62,14 @@ def compute_cross_model_interactions_concurently(inputData: pd.DataFrame, output
     seq_list1 = inputData['seq1']
     seq_list2 = inputData['seq2']
 
-    # do we really need it here?
-    # Can we do it in memory?
     if not os.path.exists(outputDirectory):
         os.mkdir(outputDirectory)
+
     meta_file = open(outputDirectory+'/meta.csv', 'w')
 
     print("seq,length", file=meta_file)
 
-    # Here Thread executor will be much faster
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    with concurrent.futures.ProcessPoolExecutor() as executor:
         for i in range(len(seq_list1)):
 
             name = "pair_" + str(i)
@@ -79,8 +78,10 @@ def compute_cross_model_interactions_concurently(inputData: pd.DataFrame, output
 
             seq1 = str(seq_list1[i])
             seq2 = str(seq_list2[i])
-            outputSubdirectory = outputDirectory + '/' + name + 'iapp'
+            outputSubdirectory = outputDirectory + '/' + name
+            if not os.path.exists(outputSubdirectory):
+                os.mkdir(outputSubdirectory)
 
-            future = executor.submit(cross_model, seq1, seq2, name, outputSubdirectory)
+            future = executor.submit(cross_model, seq1, seq2, outputSubdirectory)
     meta_file.close()
     return future

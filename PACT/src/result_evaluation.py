@@ -1,28 +1,41 @@
 import pandas as pd
 import numpy as np
 import os
+import subprocess
 
 
-def create_meta_file(seq_list1, seq_list2):
+def create_meta_file(seq_list1, seq_list2, outputFolder : str):
     if(len(seq_list1) != len(seq_list2)):
         return
     # Probably parametrized by output path
-    meta_file = open('/meta.csv', 'w')
+    if not os.path.exists(outputFolder):
+        os.mkdir(outputFolder)
+    meta_file_path = outputFolder + '/' + 'meta.csv'
+    meta_file = open(meta_file_path, 'w')
     print("seq,length", file=meta_file)
     for i in range(len(seq_list1)):
         name = "pair_" + str(i)
         length = (len(seq_list1[i])+len(seq_list2[i]))/2
         print("%s,%f" % (name, length), file=meta_file)
     meta_file.close()
+    return meta_file_path
 
-def compute_energies():
+def run_script(script):
+    
+    p = subprocess.Popen(script, stdin=subprocess.PIPE, shell=True)
+    (output, err) = p.communicate()
+
+def compute_energies(inputDirectory : str):
     '''This should probably do what currently does data.sh script.'''
     # how we now that ../scripts/data.sh is there? ; If I were to pip install pact then I should be able to use it anywhere
-    os.link('../scripts/data.sh', 'data.sh')
+    cwd = os.getcwd()
+    os.chdir(inputDirectory)
+    os.link('/PACT/scripts/data.sh', inputDirectory+'/'+'data.sh')
 
-    # Can we do it without using bash scripts???
     run_script("bash data.sh > energy.csv")
-    pass
+    os.chdir(cwd)
+
+    return inputDirectory + '/' + 'energy.csv'
 
 def find_minimum_energies(energies : pd.DataFrame, meta_file : pd.DataFrame, threshold):
     '''Numpy manipulations from compute_scores should be here.'''
@@ -34,10 +47,11 @@ def find_minimum_energies(energies : pd.DataFrame, meta_file : pd.DataFrame, thr
 
     return min_e.values
 
-def save_energies_to_file(results : np.ndarray, initial_data : pd.DataFrame):
+def save_energies_to_file(results : np.ndarray, initial_data : pd.DataFrame, output_folder : str):
     names_list1 = initial_data['interactor']
     names_list2 = initial_data['interactee']
-    results_file = open('results.csv', 'w')
+    result_file_path = output_folder + '/' + 'results.csv'
+    results_file = open(result_file_path, 'w')
 
     # should be behind verbose flag
     # because we don't need it in web application
@@ -48,14 +62,13 @@ def save_energies_to_file(results : np.ndarray, initial_data : pd.DataFrame):
             i, names_list1[i], names_list2[i],  results[i, -2], results[i, -1]), file=results_file)
 
     results_file.close()
+    return result_file_path
 
 
 def compute_scores(data: pd.DataFrame, output_path: str,threshold):
     # Scoring
-    os.chdir(output_path)
-
-    compute_energies()
-    energies = pd.read_csv("energy.csv")
-    meta_file = pd.read_csv("meta.csv")
+    energyFilePath = compute_energies(output_path)
+    energies = pd.read_csv(energyFilePath)
+    meta_file = pd.read_csv(output_path + '/' + "meta.csv")
     min_energies = find_minimum_energies(energies, meta_file, threshold)
-    save_energies_to_file(min_energies, data)
+    return save_energies_to_file(min_energies, data, output_path)

@@ -4,14 +4,15 @@ import os
 from PACT.src.computation import runModeller, compute_cross_model_interactions_concurently, cross_model
 
 
+'''
 def test_runModeller():
-    pathToAlignmentFile = '/PACT/PACT/tests/alignment.pir'
+    pathToAlignmentFile = '/PACT/PACT/res/alignment.pir'
     pathToOutputDirectory = 'results'
     result = runModeller(pathToAlignmentFile, pathToOutputDirectory)
     assert(os.path.exists(pathToOutputDirectory))
 
 def test_cross_model():
-    inputFilePath = '/PACT/PACT/tests/example.csv'
+    inputFilePath = '/PACT/PACT/res/example.csv'
     outputFolderPath = 'crossModelResults'
     data = pd.read_csv(inputFilePath)
 
@@ -26,8 +27,9 @@ def test_cross_model():
         assert(os.path.exists(outputFolderPath))
 
 def test_compute_cross_model_interactions_concurently():
-    inputFilePath = '/PACT/PACT/tests/example.csv'
+    inputFilePath = '/PACT/PACT/res/example.csv'
     outputFolderPath = 'crossModelResults'
     inputData = pd.read_csv(inputFilePath)
     compute_cross_model_interactions_concurently(inputData, outputFolderPath)
     assert(os.path.exists(outputFolderPath))
+'''

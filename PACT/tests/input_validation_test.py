@@ -6,5 +6,5 @@ def test_sequence_validation():
     assert is_sequence_well_formed(sequence) == True
 
 def test_input_file_validation():
-    pathToExampleFile = '/PACT/PACT/tests/example.csv'
+    pathToExampleFile = '/PACT/PACT/res/example.csv'
     assert is_input_file_well_formed(pathToExampleFile) == True

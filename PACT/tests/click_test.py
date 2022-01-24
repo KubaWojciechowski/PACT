@@ -11,6 +11,6 @@ def test_create_alignment_file():
     '--seq1','KCNTATCATQRLANFLVHSSNNFGAILSSTNVGSNTY',
     '--seq2','DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVV',
     '--structure','iapp',
-    '--fasta', 'PACT/res/templates.fasta'])
+    '--fasta', '/PACT/PACT/res/templates.fasta'])
     assert result.exit_code == 0
     assert os.path.exists('outputFolder') == True
