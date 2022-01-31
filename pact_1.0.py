@@ -14,7 +14,7 @@ def inParser():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input", help = "Input file")
     parser.add_argument("-o", "--output", default='output' , help = "Output directory path")
-    parser.add_argument("-t", "--threshold", default=-236 , help = "Energy threshold")
+    parser.add_argument("-t", "--threshold", default=-235 , help = "Energy threshold")
     args = parser.parse_args()
     
     return(args)
@@ -170,7 +170,30 @@ def check_input(input_path):
 
         n+=1
 
+def parse_modeller_output(fname):
+    scores = []
+    with open(fname) as f:
+        for line in f:
+            if line.startswith('sequence'):
+                tmp = line.strip().split()
+                model = int(tmp[0][-6:-4])
+                energies = line.strip().split()[1:]
+                scores.append([model] + energies)
 
+    return np.array(scores)
+
+
+def parse_out_files(path):
+    with open("energy.csv", 'w') as out_file:
+        print("seq,class,model,molpdf,dope,ga341", file=out_file)
+        for pair in os.listdir():    
+            if os.path.isdir(pair):
+                for model in os.listdir(pair): 
+                    file_path = pair+'/'+model+'/runMod.log'
+                    energy = parse_modeller_output(file_path)
+                    for i in energy:
+                        print("%s,%s,%s,%s,%s,%s" % (pair, model, i[0], i[1], i[2], i[3]), file=out_file)
+        
 
 if __name__ == '__main__':
   
@@ -216,15 +239,13 @@ if __name__ == '__main__':
                 
                 future = executor.submit(cross_model, seq1, seq2, name, output_path)
 
-      
+
     f.close()
         
     # Scoring
     os.chdir(output_path)
-
-    os.link('../scripts/data.sh', 'data.sh') 
-    
-    runScript("bash data.sh > energy.csv")
+ 
+    parse_out_files('.')
 
     data = pd.read_csv("energy.csv")
     meta = pd.read_csv("meta.csv")
