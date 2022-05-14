@@ -1,4 +1,4 @@
-from PACT.src.preprocessing import SequencePreprocessor
+from pact_core.preprocessing import SequencePreprocessor
 import os
 
 # should be in some constants file
