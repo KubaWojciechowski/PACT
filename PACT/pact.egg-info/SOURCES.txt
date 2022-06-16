@@ -6,6 +6,8 @@ PACT/pact.egg-info/PKG-INFO
 PACT/pact.egg-info/SOURCES.txt
 PACT/pact.egg-info/dependency_links.txt
 PACT/pact.egg-info/top_level.txt
+PACT/pact_cli/__init__.py
+PACT/pact_cli/cli.py
 PACT/pact_core/__init__.py
 PACT/pact_core/computation.py
 PACT/pact_core/input_parsing.py

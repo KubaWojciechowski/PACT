@@ -1,3 +1,4 @@
+pact_cli
 pact_core
 res
 tests
