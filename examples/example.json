@@ -1,0 +1,14 @@
+[
+    {
+        "interactor": "IAPP",
+        "seq1": "KCNTATCATQRLANFLVHSSNNFGAILSSTNVGSNTY",
+        "interactee": "AmyloidB",
+        "seq2": "DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVV"
+    },
+    {
+        "interactor": "AmyloidB",
+        "seq1": "DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVV",
+        "interactee": "AmyloidB",
+        "seq2": "DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVV"
+    }
+]
