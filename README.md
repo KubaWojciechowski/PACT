@@ -29,7 +29,7 @@ bash rebuild.sh
 ```
 You can now run PACT by calling it's module:
 
-`python -m pact_cli.cli --input_file examples/example.csv -o examples/output`
+`python -m pact_cli.cli --input_file examples/example.csv --output_dir examples/output`
 
 ## PACT output
 As PACT perform structural modeling which is computationaly expensive it might take a while to get your results. PACT output contains files containing energies and classification as well as directories for each protein fragment from input. Each of them have directories for molecular models for each of possible structural classes.
