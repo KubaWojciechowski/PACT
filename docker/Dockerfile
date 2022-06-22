@@ -23,3 +23,5 @@ RUN conda install -y numpy pandas biopython pytest click
 RUN conda config --add channels salilab
 RUN conda install modeller
 RUN ln -s /opt/conda/bin/mod* /opt/conda/bin/mod
+# build tools
+RUN pip install build

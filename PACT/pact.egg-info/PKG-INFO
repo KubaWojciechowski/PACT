@@ -1,11 +1,9 @@
 Metadata-Version: 2.1
 Name: pact
 Version: 0.0.1
-Summary: A small example package
-Home-page: https://github.com/pypa/sampleproject
-Author: Example Author
-Author-email: author@example.com
-Project-URL: Bug Tracker, https://github.com/pypa/sampleproject/issues
+Summary: PACT is a computational pipeline for prediction of amyloid cross-interactions.
+Author: Jakub Wojciechowski
+Author-email: jakubwojciechowski@pwr.edu.pl
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
