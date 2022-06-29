@@ -3,7 +3,7 @@ WORKDIR /PACT
 # miniconda PATH
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
-ENV KEY_MODELLER MODELIRANJE
+ENV KEY_MODELLER XXXXX
 
 RUN apt-get update --fix-missing && \
     apt-get install -y wget bzip2 ca-certificates curl git && \
