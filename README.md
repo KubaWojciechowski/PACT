@@ -1,7 +1,7 @@
 ![Alt text](logo_v1_bg.png)
 ## Requirements
 PACT is a computational pipeline for prediction of amyloid cross-interactions. It uses poular molecular modeling software, in oreder to use it you need to install:
-* Modeller (tested with 9.24 but should work with other versions too)
+* Modeller (tested with 9.24 but should work with other versions too, You need to provide licence key, put it into docker/dockerfile: "ENV KEY_MODELLER" XXXXX") 
 * Python3
 As well as some Python packages:
 * Numpy
