@@ -6,11 +6,12 @@ from Bio import SeqIO
 from pathlib import Path
 import logging
 
+from pact_core.utils import get_templates_path
 
 class SequencePreprocessor():
 
     def __init__(self):
-        self.fasta_file = Path('/PACT/PACT/res/templates.fasta')
+        self.fasta_file = get_templates_path().parent.joinpath('templates.fasta')
         self.format_str = 'fasta'
 
     def get_sequence_of_structure(self, structure: str) -> str:

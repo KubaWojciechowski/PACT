@@ -4,7 +4,6 @@ from pathlib import Path
 import logging
 import sys
 
-from importlib import resources
 
 import pandas as pd
 import numpy as np
@@ -12,11 +11,9 @@ from modeller import *
 from modeller.automodel import *
 
 from pact_core.preprocessing import SequencePreprocessor
-import res.templates as templates_folder
 
-def get_templates_path() -> Path:
-	with resources.path(templates_folder,'iapp.pdb') as structure_file:
-		return structure_file.parent
+from pact_core.utils import get_templates_path
+
 
 def runModeller(alignment_file_path : Path, output_dir : Path):
 	class MyModel(AutoModel):
@@ -63,7 +60,6 @@ def parse_modeller_result(modeller_result) -> np.array:
 	return np.array(scores)
 
 def save_energy_file(energies : np.array, output_dir: Path, structure : str) -> Path:
-    # Should use Path for all file manipulations
 	base_path = output_dir
 	output_file = output_dir.parent.joinpath('energy.csv')
 	with open(output_file,'a') as out_file:
@@ -86,8 +82,6 @@ def cross_model(seq1 : str, seq2 : str, output_dir : Path):
 	for structure in ['iapp']: # should be parametrized
 		model_path = output_dir.joinpath(structure)
 		alignment_file_path = processor.create_alignment_file(seq1, seq2, structure, model_path)
-		print(alignment_file_path.absolute())
-		#sys.exit()
 		results = runModeller(alignment_file_path.absolute(), model_path)
 		parse_and_save_energies(results, base_path, structure)
 	return results
