@@ -97,7 +97,7 @@ def compute_cross_model_interactions_concurently(input_data : pd.DataFrame, outp
 	with open(output_dir.joinpath('energy.csv'), 'w') as energy_file:
 		print("seq,class,model,molpdf,dope,ga341", file=energy_file)
 
-	with open(output_dir.joinpath('/meta.csv'), 'w') as meta_file:
+	with open(output_dir.joinpath('meta.csv'), 'w') as meta_file:
 
 		print("seq,length", file=meta_file)
 
