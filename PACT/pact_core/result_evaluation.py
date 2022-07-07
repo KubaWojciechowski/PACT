@@ -32,11 +32,11 @@ def find_minimum_energies(energies : pd.DataFrame, meta_file : pd.DataFrame, thr
     return min_e.values
 
 def save_results_to_file(results : np.ndarray, initial_data : pd.DataFrame, output_folder : Path) -> Path:
-    names_list1 = initial_data['interactor']
-    names_list2 = initial_data['interactee']
+    names_list1 = initial_data['protein1']
+    names_list2 = initial_data['protein2']
     result_file_path = output_folder.joinpath('results.csv')
     with open(result_file_path, 'w') as results_file:
-        print('pair,interactor,interactee,score,classification', file=results_file)
+        print('pair,protein1,protein2,score,classification', file=results_file)
         for i in range(len(results)):
             print("%d,%s,%s,%3.2f,%d" % (
                 i, names_list1[i], names_list2[i],  results[i, -2], results[i, -1]), file=results_file)

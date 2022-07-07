@@ -15,7 +15,7 @@ def is_input_file_well_formed(input_file: Path) -> bool:
 
     data = pd.read_csv(input_file)
 
-    if not (data.columns == ['interactor', 'seq1', 'interactee', 'seq2'
+    if not (data.columns == ['protein1', 'seq1', 'protein2', 'seq2'
                              ]).all():
         return False
 

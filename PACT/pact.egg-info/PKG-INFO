@@ -1,3 +1,16 @@
+Metadata-Version: 2.1
+Name: pact
+Version: 0.0.1
+Summary: PACT is a computational pipeline for prediction of amyloid cross-interactions.
+Author: Jakub Wojciechowski
+Author-email: jakubwojciechowski@pwr.edu.pl
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 ![Alt text](logo_v1_bg.png)
 ## Requirements
 PACT is a computational pipeline for prediction of amyloid cross-interactions. It uses poular molecular modeling software, in oreder to use it you need to install:
