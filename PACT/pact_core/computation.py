@@ -94,20 +94,23 @@ def compute_cross_model_interactions_concurently(input_data : pd.DataFrame, outp
 	seq_list1 = input_data['seq1']
 	seq_list2 = input_data['seq2']
 
+	names_list1 = input_data['protein1']
+	names_list2 = input_data['protein2']
+
 	with open(output_dir.joinpath('energy.csv'), 'w') as energy_file:
 		print("seq,class,model,molpdf,dope,ga341", file=energy_file)
 
 	with open(output_dir.joinpath('meta.csv'), 'w') as meta_file:
 
-		print("seq,length", file=meta_file)
+		print("name1,name2,seq,length", file=meta_file)
 
 		with concurrent.futures.ProcessPoolExecutor() as executor:
 			for i in range(len(seq_list1)):
-				name = "pair_" + str(i)
+				name = "pair_" + str(i).zfill(5)
 				length = (len(seq_list1[i])+len(seq_list2[i]))/2
-				print("%s,%f" % (name, length), file=meta_file)
+				print("%s,%s,%s,%f" % (names_list1[i], names_list2[i], name, length), file=meta_file)
 
-				seq1 = str(seq_list1[i])
+					seq1 = str(seq_list1[i])
 				seq2 = str(seq_list2[i])
 				output_subdir = output_dir.joinpath(name)
 

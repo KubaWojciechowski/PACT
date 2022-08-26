@@ -24,8 +24,10 @@ def main_cli(input_file, output_dir, threshold):
 
     seq_list1 = data['seq1']
     seq_list2 = data['seq2']
+    names_list1 = data['protein1']
+    names_list2 = data['protein2']
 
-    meta_file_path = create_meta_file(seq_list1, seq_list2, output_dir)
+    meta_file_path = create_meta_file(names_list1, names_list2, seq_list1, seq_list2, output_dir)
     compute_cross_model_interactions_concurently(data, output_dir)
     meta_file = pd.read_csv(meta_file_path)
     energy_file_path = output_dir.joinpath('energy.csv')

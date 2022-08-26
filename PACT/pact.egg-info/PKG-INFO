@@ -25,7 +25,7 @@ PATH takes as an input csv file with the folowing columns:
 
 protein1,seq1,protein2,seq2
 
-Where interactor and interactee are the names, and seq1 and seq2 are sequences of interacting proteins in fasta format
+Where protein1 and protein2 are the names, and seq1 and seq2 are sequences of interacting proteins in fasta format
 ## Running PACT
 You can run PACT in docker. First build the container:
 ``` shell
