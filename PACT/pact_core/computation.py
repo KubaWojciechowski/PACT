@@ -110,7 +110,7 @@ def compute_cross_model_interactions_concurently(input_data : pd.DataFrame, outp
 				length = (len(seq_list1[i])+len(seq_list2[i]))/2
 				print("%s,%s,%s,%f" % (names_list1[i], names_list2[i], name, length), file=meta_file)
 
-					seq1 = str(seq_list1[i])
+				seq1 = str(seq_list1[i])
 				seq2 = str(seq_list2[i])
 				output_subdir = output_dir.joinpath(name)
 
