@@ -8,7 +8,7 @@ import pandas as pd
 @click.command()
 @click.option('--input_file', default='example.csv', help='input file')
 @click.option('--output_dir', default='output', help='output directory')
-@click.option('--threshold', default=-236, help="Energy threshold")
+@click.option('--threshold', default=-256, help="Energy threshold")
 def main_cli(input_file, output_dir, threshold):
     input_file = Path(input_file)
     if not is_input_file_well_formed(input_file):
