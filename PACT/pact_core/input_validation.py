@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def is_sequence_well_formed(seq: str) -> bool:
-    if re.search("[A-Y]{14,45}", seq) and re.search("^((?!B|J|O|U).)*$", seq):
+    if re.search("[A-Y]{14,45}", seq) and re.search("^((?!B|J|O|U).)*$", seq) and len(seq) <=45:
         return True
     return False
 
